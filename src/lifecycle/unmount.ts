@@ -10,5 +10,8 @@ export function unMountApp(app: Application) {
 
   return result
     .then(() => app.status = AppStatus.UNMOUNTED)
-    .catch(() => app.status = AppStatus.UNMOUNT_ERROR)
+    .catch((err) => {
+      app.status = AppStatus.UNMOUNT_ERROR
+      throw err
+    })
 }

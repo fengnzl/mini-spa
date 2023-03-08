@@ -27,7 +27,7 @@ function getAppsWithStatus(status: AppStatus) {
     if (isActive(app) && app.status === status) {
       switch (app.status) {
         case AppStatus.BEFORE_BOOTSTRAP:
-        case AppStatus.BEFORE_MOUNT:
+        case AppStatus.BOOTSTRAPPED:
         case AppStatus.UNMOUNTED:
           result.push(app)
           break
@@ -35,7 +35,7 @@ function getAppsWithStatus(status: AppStatus) {
     }
     else if (
       app.status === AppStatus.MOUNTED
-      && status === AppStatus.UNMOUNTED
+      && status === AppStatus.MOUNTED
     ) {
       // to unmount
       result.push(app)

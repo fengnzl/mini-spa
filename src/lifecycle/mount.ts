@@ -10,5 +10,8 @@ export function mountApp(app: Application): Promise<any> {
 
   return result
     .then(() => app.status = AppStatus.MOUNTED)
-    .catch(() => app.status = AppStatus.MOUNT_ERROR)
+    .catch((err) => {
+      app.status = AppStatus.MOUNT_ERROR
+      throw err
+    })
 }

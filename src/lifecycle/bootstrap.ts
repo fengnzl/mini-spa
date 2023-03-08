@@ -27,7 +27,10 @@ export async function bootstrapApp(app: Application): Promise<any> {
 
   return result
     .then(() => app.status = AppStatus.BOOTSTRAPPED)
-    .catch(() => app.status = AppStatus.BOOTSTRAP_ERROR)
+    .catch((err) => {
+      app.status = AppStatus.BOOTSTRAP_ERROR
+      throw err
+    })
 }
 
 async function getProps(props: Function | AnyObject) {
