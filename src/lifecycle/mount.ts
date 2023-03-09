@@ -4,7 +4,7 @@ import { isPromise } from '../utils/utils'
 export function mountApp(app: Application): Promise<any> {
   app.status = AppStatus.BEFORE_MOUNT
 
-  let result = app.mount!(app.props)
+  let result = app.mount!(app.props!)
   if (!isPromise(result))
     result = Promise.resolve(result)
 

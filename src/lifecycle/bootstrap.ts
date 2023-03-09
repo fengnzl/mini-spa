@@ -1,9 +1,11 @@
 import type { AnyObject, Application } from '../types'
 import { AppStatus } from '../types'
 import { isObject, isPromise } from '../utils/utils'
+import { parseHTMLAndLoadSources } from '../utils/parseHTMLAndLoadSources'
 
 export async function bootstrapApp(app: Application): Promise<any> {
-  const { bootstrap, mount, unmount } = await app.loadApp()
+  await parseHTMLAndLoadSources(app)
+  const { bootstrap, mount, unmount } = app
 
   validateLifeCycleFunc('bootstrap', bootstrap)
   validateLifeCycleFunc('mount', mount)
@@ -33,11 +35,13 @@ export async function bootstrapApp(app: Application): Promise<any> {
     })
 }
 
-async function getProps(props: Function | AnyObject) {
+async function getProps(
+  props: Function | AnyObject | undefined,
+): Promise<Function | AnyObject> {
   if (typeof props === 'function')
     return props()
   if (isObject(props))
-    return props
+    return props as AnyObject
   return {}
 }
 

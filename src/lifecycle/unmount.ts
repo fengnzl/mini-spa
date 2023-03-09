@@ -4,7 +4,7 @@ import { isPromise } from '../utils/utils'
 export function unMountApp(app: Application) {
   app.status = AppStatus.BEFORE_UNMOUNT
 
-  let result = app.unmount!(app.props)
+  let result = app.unmount!(app.props!)
   if (!isPromise(result))
     result = Promise.resolve(result)
 
