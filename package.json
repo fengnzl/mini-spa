@@ -38,7 +38,7 @@
   "scripts": {
     "dev:local": "unbuild --stub",
     "build": "unbuild",
-    "watch": "rollup -c rollup.config.js",
+    "watch": "rollup -c rollup.config.js --watch",
     "dev": "pnpm run playground:install && pnpm run playground:dev",
     "serve": "pnpm run playground:install && pnpm build && pnpm run playground:dev",
     "lint": "eslint .",
