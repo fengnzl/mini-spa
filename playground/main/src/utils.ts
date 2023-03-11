@@ -1,5 +1,5 @@
-export function $(query: string): HTMLElement | null {
-  return document.querySelector(query)
+export function $(query: string): HTMLElement {
+  return document.querySelector(query) as HTMLElement
 }
 
 export function pathPrefix(prefix: string) {

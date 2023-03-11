@@ -34,7 +34,7 @@ export async function unmount() {
   app = null;
   router = null;
 }
-console.log(window.__IS_SINGLE_SPA__);
+
 if (window.__IS_SINGLE_SPA__) {
   window["mini-single-spa-vue"] = {
     bootstrap,

@@ -18,6 +18,11 @@ export interface Application {
   name: string
   activeRule: Function | string
   props?: AnyObject | Function
+  pageEntry: string
+  container: HTMLElement
+  pageBody?: string
+  // 子应用已经加载的远程资源 用于去重
+  appLoadedURLs?: string[]
   /**
    * loadApp 必须返回一个 Promise, resolve 之后得到一个对象
    * bootstrap: (props: AnyObject) => Promise<any>
@@ -29,11 +34,18 @@ export interface Application {
   unmount?: (props: AnyObject) => Promise<any>
   mount?: (props: AnyObject) => Promise<any>
   bootstrap?: (props: AnyObject) => Promise<any>
-  pageEntry: string
-  container: HTMLElement
-  pageBody?: string
-  // 子应用已经加载的远程资源 用于去重
-  appLoadedURLs?: string[]
+  // 子应用 app 生命周期钩子， 加载入口页面资源触发，只会触发一次
+  beforeBootstrap?: () => void
+  // app 生命周期钩子，页面入口的资源被加载并执行后触发，只会触发一次
+  bootstrapped?: () => void
+  // app 生命周期钩子，挂载前触发，每次挂载都会触发一次
+  beforeMount?: () => void
+  // app 生命周期钩子，挂载后触发，每次挂载都会触发一次
+  mounted?: () => void
+  // app 生命周期钩子，卸载前触发，每次卸载都会触发一次
+  beforeUnmount?: () => void
+  // app 生命周期钩子，卸载后触发，每次卸载都会触发一次
+  unMounted?: () => void
 }
 
 /**

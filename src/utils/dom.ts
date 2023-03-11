@@ -1,4 +1,4 @@
-import type { AnyObject } from '../../dist/types'
+import type { AnyObject } from '../types'
 export function removeNode(node: Element) {
   node.parentNode?.removeChild(node)
 }

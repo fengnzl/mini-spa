@@ -2,9 +2,11 @@ import type { AnyObject, Application } from '../types'
 import { AppStatus } from '../types'
 import { isObject, isPromise } from '../utils/utils'
 import { parseHTMLAndLoadSources } from '../utils/parseHTMLAndLoadSources'
+import { triggerAppHook } from '../utils/application'
 declare const window: any
 
 export async function bootstrapApp(app: Application): Promise<any> {
+  triggerAppHook(app, 'beforeBootstrap', AppStatus.BEFORE_BOOTSTRAP)
   // eslint-disable-next-line no-useless-catch
   try {
     await parseHTMLAndLoadSources(app)
@@ -36,7 +38,9 @@ export async function bootstrapApp(app: Application): Promise<any> {
     result = Promise.resolve(result)
 
   return result
-    .then(() => app.status = AppStatus.BOOTSTRAPPED)
+    .then(() =>
+      triggerAppHook(app, 'bootstrapped', AppStatus.BOOTSTRAPPED),
+    )
     .catch((err) => {
       app.status = AppStatus.BOOTSTRAP_ERROR
       throw err
