@@ -1,16 +1,29 @@
 import typescript from "@rollup/plugin-typescript";
-import { watch, defineConfig } from "rollup";
+import { defineConfig } from "rollup";
+import dts from "rollup-plugin-dts";
 
-export default defineConfig({
-  input: 'src/index.ts',
-  output: {
-    file: 'dist/index.mjs',
-    format: 'es',
-    sourcemap: true,
-    name: 'MiniSingleSPA',
+export default defineConfig([
+  {
+    input: "src/index.ts",
+    output: {
+      file: "dist/index.mjs",
+      format: "es",
+      sourcemap: true,
+      name: "MiniSingleSPA",
+    },
+    plugins: [
+      typescript({
+        rootDir: process.cwd(),
+      }),
+    ],
   },
-  plugins: [
-    typescript(),
-  ],
-})
+  {
+    input: "src/index.ts",
+    output: [{
+      file: "dist/index.d.ts",
+      format: "es"
+    }],
+    plugins: [dts()],
+  }
+])
 
