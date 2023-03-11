@@ -30,6 +30,22 @@ export interface Application {
   mount?: (props: AnyObject) => Promise<any>
   bootstrap?: (props: AnyObject) => Promise<any>
   pageEntry: string
-  container: HTMLElement | null
+  container: HTMLElement
   pageBody?: string
+  // 子应用已经加载的远程资源 用于去重
+  appLoadedURLs?: string[]
+}
+
+/**
+ * script css 的全局属性
+ */
+export interface Source {
+  // 是否是全局资源
+  isGlobal: boolean
+  // 资源的 url
+  url?: string
+  // 资源的内容 如果 url 有值 则忽略
+  value: string | null
+  // script 的类型
+  type?: string | null
 }
