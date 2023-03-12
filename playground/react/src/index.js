@@ -29,6 +29,25 @@ if (window.__IS_SINGLE_SPA__) {
     mount,
     unmount
   }
+  window.addEventListener("click", () => {
+    console.log("window click: react");
+  });
+
+  window.onclick = () => {
+    console.log("window onclick: react");
+  };
+
+  document.addEventListener("click", () => {
+    console.log("document click: react");
+  });
+
+  document.onclick = () => {
+    console.log("document onclick: react");
+  };
+
+  setTimeout(() => {
+    console.log("setTimeout react");
+  }, 1000);
 } else {
   render()
 }

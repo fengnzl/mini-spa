@@ -1,4 +1,5 @@
 import type { AnyObject } from '../types'
+import { originalWindow } from './originalEnv'
 export function removeNode(node: Element) {
   node.parentNode?.removeChild(node)
 }
@@ -25,4 +26,16 @@ export function addStyles(styles: string[] | HTMLStyleElement[]) {
       head.appendChild(item)
     }
   })
+}
+
+const onEventTypes: string[] = []
+export function getEventTypes() {
+  if (onEventTypes.length)
+    return onEventTypes
+
+  for (const key of Object.keys(originalWindow)) {
+    if (typeof key === 'string' && key.startsWith('on'))
+      onEventTypes.push(key.slice(2))
+  }
+  return onEventTypes
 }

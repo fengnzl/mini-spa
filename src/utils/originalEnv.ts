@@ -1,2 +1,7 @@
 import type { MicroWindow } from '../types'
 export const originalWindow: MicroWindow = window
+export const originalWindowAddEventListener = window.addEventListener
+export const originalWindowRemoveEventListener = window.removeEventListener
+export const originalDefineProperty = Object.defineProperty
+// eslint-disable-next-line no-eval
+export const originalEval = window.eval

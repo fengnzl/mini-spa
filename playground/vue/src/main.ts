@@ -41,6 +41,25 @@ if (window.__IS_SINGLE_SPA__) {
     mount,
     unmount,
   };
+  window.addEventListener("click", () => {
+    console.log("window click: vue");
+  });
+
+  window.onclick = () => {
+    console.log("window onclick: vue");
+  };
+
+  document.addEventListener("click", () => {
+    console.log("document click: vue");
+  });
+
+  document.onclick = () => {
+    console.log("document onclick: vue");
+  };
+
+  setTimeout(() => {
+    console.log("setTimeout");
+  }, 3000);
 } else {
   render({});
 }
