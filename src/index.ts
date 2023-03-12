@@ -1,4 +1,4 @@
-import { overwriteEventAndHistory } from './navigation/overwriteEventAndHistory'
+import { overwriteEventAndHistory } from './utils/overwriteEventAndHistory'
 export { registerApplication } from './application/registerApplication'
 export { start } from './start'
 
