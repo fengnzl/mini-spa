@@ -10,7 +10,10 @@ export function unMountApp(app: Application) {
     result = Promise.resolve(result)
 
   return result
-    .then(() => triggerAppHook(app, 'unMounted', AppStatus.UNMOUNTED))
+    .then(() => {
+      app.sandBox?.stop()
+      triggerAppHook(app, 'unMounted', AppStatus.UNMOUNTED)
+    })
     .catch((err) => {
       app.status = AppStatus.UNMOUNT_ERROR
       throw err

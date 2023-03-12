@@ -5,12 +5,12 @@ import * as serviceWorker from './serviceWorker';
 
 function render(options = {}) {
   const { container } = options;
-
+  console.log(container.querySelector("#root"));
   ReactDOM.render(<App />, container ? container.querySelector('#root'): document.querySelector('#root'));
 }
 
 export async function bootstrap() {
-  console.log('[react16] react app bootstraped');
+  console.log('[react16] react app bootstrapped');
 }
 
 export async function mount(options) {

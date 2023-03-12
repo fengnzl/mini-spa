@@ -1,8 +1,10 @@
 import type { AnyObject, Application } from '../types'
 import { AppStatus } from '../types'
 import { isObject, isPromise } from '../utils/utils'
-import { parseHTMLAndLoadSources } from '../utils/parseHTMLAndLoadSources'
+import { executeScripts, parseHTMLAndLoadSources } from '../utils/source'
 import { triggerAppHook } from '../utils/application'
+import { SandBox } from '../sandbox/SandBox'
+import { addStyles } from '../utils/dom'
 declare const window: any
 
 export async function bootstrapApp(app: Application): Promise<any> {
@@ -15,7 +17,15 @@ export async function bootstrapApp(app: Application): Promise<any> {
     throw error
   }
 
-  const { bootstrap, mount, unmount } = await getLifeCycleFuncs(app.name)
+  app.sandBox = new SandBox(app)
+  app.sandBox.start()
+  app.container.innerHTML = app.pageBody as string
+
+  // 执行子应用入口页面的 styles 和 scripts 标签
+  addStyles(app.styles!)
+  executeScripts(app.scripts as string[], app)
+
+  const { bootstrap, mount, unmount } = await getLifeCycleFuncs(app)
 
   validateLifeCycleFunc('bootstrap', bootstrap)
   validateLifeCycleFunc('mount', mount)
@@ -38,9 +48,10 @@ export async function bootstrapApp(app: Application): Promise<any> {
     result = Promise.resolve(result)
 
   return result
-    .then(() =>
-      triggerAppHook(app, 'bootstrapped', AppStatus.BOOTSTRAPPED),
-    )
+    .then(() => {
+      triggerAppHook(app, 'bootstrapped', AppStatus.BOOTSTRAPPED)
+      app.sandBox?.recordWindowSnapshot()
+    })
     .catch((err) => {
       app.status = AppStatus.BOOTSTRAP_ERROR
       throw err
@@ -62,8 +73,8 @@ function validateLifeCycleFunc(name: string, fn: any) {
     throw new Error(`The ${name} must be a function`)
 }
 
-async function getLifeCycleFuncs(name: string) {
-  const result = window[`mini-single-spa-${name}`]
+async function getLifeCycleFuncs(app: Application) {
+  const result = app.sandBox?.proxyWindow[`mini-single-spa-${app.name}`]
   if (typeof result === 'function')
     return result()
 

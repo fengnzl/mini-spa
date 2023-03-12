@@ -4,8 +4,16 @@ import { isPromise } from '../utils/utils'
 import { triggerAppHook } from '../utils/application'
 export function mountApp(app: Application): Promise<any> {
   triggerAppHook(app, 'beforeMount', AppStatus.BEFORE_MOUNT)
-  app.container.innerHTML = app.pageBody as string
 
+  if (!app.isFirstLoaded) {
+    // 重新加载子应用时恢复快照
+    app.sandBox?.restoreWindowSnapshot()
+    app.sandBox?.start()
+    app.container.innerHTML = app.pageBody as string
+  }
+  else {
+    app.isFirstLoaded = false
+  }
   let result = app.mount!({
     props: app.props,
     container: app.container,

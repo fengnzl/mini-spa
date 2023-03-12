@@ -36,7 +36,7 @@ export function parseHTMLAndLoadSources(app: Application) {
     Promise.all(loadScripts(scripts))
       .then((data) => {
         isScriptsLoaded = true
-        executeScripts(data as string[])
+        app.scripts = data as string[]
         if (isScriptsLoaded && isScriptsLoaded)
           resolve()
       })
@@ -46,7 +46,7 @@ export function parseHTMLAndLoadSources(app: Application) {
     Promise.all(loadStyles(styles))
       .then((data) => {
         isStylesLoaded = true
-        addStyles(data as string[])
+        app.styles = data as string[]
         if (isScriptsLoaded && isStylesLoaded)
           resolve()
       })
@@ -164,12 +164,19 @@ function loadScripts(scripts: Source[]) {
   }).filter(Boolean)
 }
 
-function executeScripts(scripts: string[]) {
+export function executeScripts(scripts: string[], app: Application) {
   // eslint-disable-next-line no-useless-catch
   try {
     scripts.forEach((code) => {
+      const wrapCode = `
+        (function (proxyWindow) {
+          with(proxyWindow) {
+            (function (window){${code}\n}).call(proxyWindow, proxyWindow)
+          }
+        })(this)
+      `
       // eslint-disable-next-line no-new-func
-      new Function('window', code).call(window, window)
+      new Function(wrapCode).call(app.sandBox?.proxyWindow)
     })
   }
   catch (e) {
@@ -205,19 +212,4 @@ function loadStyles(styles: Source[]) {
       return loadSourceText(item.url)
     return Promise.resolve(item.value)
   }).filter(Boolean)
-}
-
-function addStyles(styles: string[]) {
-  styles.forEach((item) => {
-    if (typeof item === 'string') {
-      const node = createElement('style', {
-        type: 'text/css',
-        textContent: item,
-      })
-      head.appendChild(node)
-    }
-    else {
-      head.appendChild(item)
-    }
-  })
 }

@@ -5,7 +5,9 @@
   </div>
   <router-view />
 </template>
-
+<script lang="ts" setup>
+(window as any).appName = "vue";
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

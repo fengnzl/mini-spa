@@ -1,6 +1,11 @@
+import type { SandBox } from './sandbox/SandBox'
 export interface AnyObject {
   [key: string]: any
 }
+
+export type MicroWindow = Window & any
+
+export type SnapshotMap = Map<string | symbol, any>
 
 export enum AppStatus {
   BEFORE_BOOTSTRAP = 'BEFORE_BOOTSTRAP',
@@ -18,11 +23,28 @@ export interface Application {
   name: string
   activeRule: Function | string
   props?: AnyObject | Function
+  // app 访问入口 URL 链接
   pageEntry: string
+  // app 挂载的 dom
   container: HTMLElement
+  // app 入口 html 的 body 内容
   pageBody?: string
   // 子应用已经加载的远程资源 用于去重
   appLoadedURLs?: string[]
+  // app 的 js 沙箱运行时
+  sandBox?: SandBox | null
+  /**
+   * app 所有的非全局 style，当 app 加载时需要添加到页面中
+   */
+  styles?: string[] | HTMLStyleElement[]
+  /**
+   * app 页面入口上的非全局 script，只会执行一次
+   */
+  scripts?: string[]
+  /**
+   * app 是否是第一次加载
+   */
+  isFirstLoaded?: boolean
   /**
    * loadApp 必须返回一个 Promise, resolve 之后得到一个对象
    * bootstrap: (props: AnyObject) => Promise<any>
