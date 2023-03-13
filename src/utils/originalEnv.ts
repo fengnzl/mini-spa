@@ -5,3 +5,5 @@ export const originalWindowRemoveEventListener = window.removeEventListener
 export const originalDefineProperty = Object.defineProperty
 // eslint-disable-next-line no-eval
 export const originalEval = window.eval
+export const originPushState = window.history.pushState
+export const originReplaceState = window.history.replaceState

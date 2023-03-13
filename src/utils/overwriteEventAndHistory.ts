@@ -1,7 +1,6 @@
 import { loadApps } from '../application/apps'
+import { originPushState, originReplaceState } from './originalEnv'
 
-const originPushState = window.history.pushState
-const originReplaceState = window.history.replaceState
 export function overwriteEventAndHistory() {
   window.history.pushState = function (state: any, title: string, url: string) {
     const result = originPushState.call(this, state, title, url)
