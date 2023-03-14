@@ -1,6 +1,6 @@
 import { AppStatus } from '../types'
 import type { Application } from '../types'
-import { apps } from './apps'
+import { appMaps } from '../utils/application'
 
 export function registerApplication(app: Application) {
   if (typeof app.activeRule === 'string') {
@@ -9,5 +9,5 @@ export function registerApplication(app: Application) {
   }
   app.isFirstLoaded = true
   app.status = AppStatus.BEFORE_BOOTSTRAP
-  apps.push(app)
+  appMaps.set(app.name, app)
 }

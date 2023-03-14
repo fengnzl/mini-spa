@@ -14,3 +14,7 @@ export function isFunction(target: any): boolean {
 export function hasOwnProperty(target: any, key: string | symbol): boolean {
   return Object.prototype.hasOwnProperty.call(target, key)
 }
+
+export function nextTick(cb: () => void) {
+  Promise.resolve().then(cb)
+}
