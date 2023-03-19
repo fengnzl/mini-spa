@@ -15,15 +15,14 @@ export function parseHTMLAndLoadSources(app: Application) {
     let html = ''
     try {
       html = await loadSourceText(pageEntry)
-    }
-    catch (e) {
+    } catch (e) {
       reject(e)
     }
     const domParser = new DOMParser()
     const doc = domParser.parseFromString(html, 'text/html')
     const { scripts, styles } = extractScriptsAndStyles(
       doc as unknown as Element,
-      app,
+      app
     )
 
     // 提取了 script style 后剩下的 body 部分的 html 内容
@@ -37,8 +36,7 @@ export function parseHTMLAndLoadSources(app: Application) {
       .then((data) => {
         isScriptsLoaded = true
         app.scripts = data as string[]
-        if (isScriptsLoaded && isScriptsLoaded)
-          resolve()
+        if (isScriptsLoaded && isScriptsLoaded) resolve()
       })
       .catch(reject)
 
@@ -47,8 +45,7 @@ export function parseHTMLAndLoadSources(app: Application) {
       .then((data) => {
         isStylesLoaded = true
         app.styles = data as string[]
-        if (isScriptsLoaded && isStylesLoaded)
-          resolve()
+        if (isScriptsLoaded && isStylesLoaded) resolve()
       })
       .catch(reject)
   })
@@ -62,13 +59,11 @@ export const globalLoadedURLs: string[] = []
 
 function extractScriptsAndStyles(
   node: Element,
-  app: Application,
+  app: Application
 ): { scripts: Source[]; styles: Source[] } {
-  if (!app.appLoadedURLs)
-    app.appLoadedURLs = []
+  if (!app.appLoadedURLs) app.appLoadedURLs = []
 
-  if (!node.children.length)
-    return { scripts: [], styles: [] }
+  if (!node.children.length) return { scripts: [], styles: [] }
 
   const styles: Source[] = []
   const scripts: Source[] = []
@@ -84,8 +79,7 @@ function extractScriptsAndStyles(
         isGlobal,
         value: child.textContent || '',
       })
-    }
-    else if (tagName === 'SCRIPT') {
+    } else if (tagName === 'SCRIPT') {
       removeNode(child)
       const src = child.getAttribute('src') || ''
       if (app.appLoadedURLs.includes(src) || globalLoadedURLs.includes(src))
@@ -98,15 +92,11 @@ function extractScriptsAndStyles(
       }
       if (src) {
         config.url = src
-        if (isGlobal)
-          globalLoadedURLs.push(src)
-
-        else
-          app.appLoadedURLs.push(src)
+        if (isGlobal) globalLoadedURLs.push(src)
+        else app.appLoadedURLs.push(src)
       }
       scripts.push(config)
-    }
-    else if (tagName === 'LINK') {
+    } else if (tagName === 'LINK') {
       removeNode(child)
       const href = child.getAttribute('href') || ''
       if (app.appLoadedURLs.includes(href) || globalLoadedURLs.includes(href))
@@ -118,14 +108,10 @@ function extractScriptsAndStyles(
           url: href,
           value: '',
         })
-        if (isGlobal)
-          globalLoadedURLs.push(href)
-
-        else
-          app.appLoadedURLs.push(href)
+        if (isGlobal) globalLoadedURLs.push(href)
+        else app.appLoadedURLs.push(href)
       }
-    }
-    else {
+    } else {
       const result = extractScriptsAndStyles(child, app)
       scripts.push(...result.scripts)
       styles.push(...result.styles)
@@ -136,32 +122,29 @@ function extractScriptsAndStyles(
 
 const head = document.head
 function loadScripts(scripts: Source[]) {
-  if (!scripts.length)
-    return []
-  return scripts.map((item) => {
-    const type = item.type || 'text/javascript'
+  if (!scripts.length) return []
+  return scripts
+    .map((item) => {
+      const type = item.type || 'text/javascript'
 
-    if (item.isGlobal) {
-      const script = createElement('script', {
-        type,
-        global: item.isGlobal,
-      })
+      if (item.isGlobal) {
+        const script = createElement('script', {
+          type,
+          global: item.isGlobal,
+        })
 
-      if (item.url)
-        script.setAttribute('src', item.url)
+        if (item.url) script.setAttribute('src', item.url)
+        else script.textContent = item.value
 
-      else
-        script.textContent = item.value
+        head.appendChild(script)
+        // eslint-disable-next-line array-callback-return
+        return
+      }
 
-      head.appendChild(script)
-      // eslint-disable-next-line array-callback-return
-      return
-    }
-
-    if (item.url)
-      return loadSourceText(item.url)
-    return Promise.resolve(item.value)
-  }).filter(Boolean)
+      if (item.url) return loadSourceText(item.url)
+      return Promise.resolve(item.value)
+    })
+    .filter(Boolean)
 }
 
 export function executeScripts(scripts: string[], app: Application) {
@@ -178,38 +161,47 @@ export function executeScripts(scripts: string[], app: Application) {
       // eslint-disable-next-line no-new-func
       new Function(wrapCode).call(app.sandBox?.proxyWindow)
     })
-  }
-  catch (e) {
+  } catch (e) {
     throw e
   }
 }
 
 function loadStyles(styles: Source[]) {
-  if (!styles.length)
-    return []
+  if (!styles.length) return []
 
-  return styles.map((item) => {
-    if (item.isGlobal) {
-      if (item.url) {
-        const link = createElement('link', {
-          global: item.isGlobal,
-          rel: 'stylesheet',
-          href: item.url,
-        })
-        head.appendChild(link)
+  return styles
+    .map((item) => {
+      if (item.isGlobal) {
+        if (item.url) {
+          const link = createElement('link', {
+            global: item.isGlobal,
+            rel: 'stylesheet',
+            href: item.url,
+          })
+          head.appendChild(link)
+        } else {
+          const style = createElement('style', {
+            global: item.isGlobal,
+            type: 'text/css',
+            textContent: item.value,
+          })
+          head.appendChild(style)
+        }
       }
-      else {
-        const style = createElement('style', {
-          global: item.isGlobal,
-          type: 'text/css',
-          textContent: item.value,
-        })
-        head.appendChild(style)
-      }
-    }
 
-    if (item.url)
-      return loadSourceText(item.url)
-    return Promise.resolve(item.value)
-  }).filter(Boolean)
+      if (item.url) return loadSourceText(item.url)
+      return Promise.resolve(item.value)
+    })
+    .filter(Boolean)
+}
+
+
+export async function fetchScriptAndExecute(url: string, app: Application) {
+  const content = await loadSourceText(url)
+  executeScripts([content], app)
+}
+
+export async function fetchStyleAndReplaceStyleContent(style: Node, url: string) {
+  const content = await loadSourceText(url)
+  style.textContent = content
 }

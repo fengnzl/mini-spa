@@ -50,6 +50,9 @@ export async function bootstrapApp(app: Application): Promise<any> {
   return result
     .then(() => {
       triggerAppHook(app, 'bootstrapped', AppStatus.BOOTSTRAPPED)
+      // 子应用首次加载的脚本执行完就不再需要了
+      app.scripts!.length = 0
+      // 记录当前的 window 快照，重新挂载子应用时恢复
       app.sandBox?.recordWindowSnapshot()
     })
     .catch((err) => {
