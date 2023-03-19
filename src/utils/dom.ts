@@ -43,3 +43,10 @@ export function getEventTypes() {
 export function isUniqueElement(key: string): boolean {
   return /^body$/i.test(key) || /^head$/i.test(key) || /^html$/i.test(key)
 }
+
+export function removeStyles(name: string) {
+  const styles = document.querySelectorAll(`style[single-spa-name=${name}]`)
+  styles.forEach(style => removeNode(style))
+
+  return styles as unknown as HTMLStyleElement[]
+}

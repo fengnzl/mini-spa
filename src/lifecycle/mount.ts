@@ -2,6 +2,7 @@ import type { Application } from '../types'
 import { AppStatus } from '../types'
 import { isPromise } from '../utils/utils'
 import { triggerAppHook } from '../utils/application'
+import { addStyles } from '../utils/dom';
 export function mountApp(app: Application): Promise<any> {
   triggerAppHook(app, 'beforeMount', AppStatus.BEFORE_MOUNT)
 
@@ -9,6 +10,7 @@ export function mountApp(app: Application): Promise<any> {
     // 重新加载子应用时恢复快照
     app.sandBox?.restoreWindowSnapshot()
     app.sandBox?.start()
+    addStyles(app.styles)
     app.container.innerHTML = app.pageBody as string
   }
   else {

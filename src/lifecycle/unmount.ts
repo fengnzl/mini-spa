@@ -2,6 +2,7 @@ import type { Application } from '../types'
 import { AppStatus } from '../types'
 import { isPromise } from '../utils/utils'
 import { triggerAppHook } from '../utils/application'
+import { removeStyles } from '../utils/dom';
 export function unMountApp(app: Application) {
   triggerAppHook(app, 'beforeUnmount', AppStatus.BEFORE_UNMOUNT)
 
@@ -12,6 +13,7 @@ export function unMountApp(app: Application) {
   return result
     .then(() => {
       app.sandBox?.stop()
+      app.styles = removeStyles(app.name)
       triggerAppHook(app, 'unMounted', AppStatus.UNMOUNTED)
     })
     .catch((err) => {
