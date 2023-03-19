@@ -7,7 +7,21 @@ export function registerApplication(app: Application) {
     const path = app.activeRule
     app.activeRule = (location = window.location) => location.pathname === path
   }
-  app.isFirstLoaded = true
-  app.status = AppStatus.BEFORE_BOOTSTRAP
+  app = {
+    ...app,
+    isFirstLoaded: true,
+    status: AppStatus.BEFORE_BOOTSTRAP,
+    pageBody: '',
+    scripts: [],
+    styles: [],
+    appLoadedURLs: [],
+  }
+  
+  if (!app.sandboxConfig) {
+    app.sandboxConfig = {
+      enabled: true,
+      css: false
+    }
+  }
   appMaps.set(app.name, app)
 }

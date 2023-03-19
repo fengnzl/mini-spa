@@ -36,11 +36,11 @@ export async function unmount() {
 }
 
 if (window.__IS_SINGLE_SPA__) {
-  window["mini-single-spa-vue"] = {
+  window.__SINGLE_SPA__ = {
     bootstrap,
     mount,
     unmount,
-  };
+  }
   window.addEventListener("click", () => {
     console.log("window click: vue");
   });

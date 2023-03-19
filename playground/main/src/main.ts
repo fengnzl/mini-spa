@@ -11,6 +11,10 @@ registerApplication({
   pageEntry: "http://localhost:5055",
   activeRule: pathPrefix("/vue"),
   container: $("#subapp-viewport"),
+  sandboxConfig: {
+    enabled: true,
+    css: true
+  },
   /**
    * app 生命周期钩子，加载页面资源前触发，只会触发一次
    */
@@ -42,6 +46,10 @@ registerApplication({
   pageEntry: "http://localhost:5054",
   activeRule: pathPrefix("/react"),
   container: $("#subapp-viewport"),
+  sandboxConfig: {
+    enabled: true,
+    css: true
+  }
 });
 
 start()

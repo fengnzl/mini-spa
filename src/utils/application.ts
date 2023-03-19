@@ -24,12 +24,19 @@ export function getApp(name: string) {
 export function temporarySetCurrentAppName(name: string | null) {
   if (currentAppName !== name) {
     currentAppName = name
-    nextTick(() => currentAppName = null)
+    nextTick(() => (currentAppName = null))
   }
 }
 
-export function triggerAppHook<K extends keyof Application>(app: Application, hook: K, status: AppStatus) {
+export function triggerAppHook<K extends keyof Application>(
+  app: Application,
+  hook: K,
+  status: AppStatus
+) {
   app.status = status
-  if (isFunction(app[hook]))
-    (app[hook] as Function)()
+  if (isFunction(app[hook])) (app[hook] as Function)()
+}
+
+export function isSandboxEnabled(app: Application) {
+  return app.sandboxConfig.enabled
 }

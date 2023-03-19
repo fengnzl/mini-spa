@@ -2,9 +2,10 @@ import type { AnyObject, Application } from '../types'
 import { AppStatus } from '../types'
 import { isObject, isPromise } from '../utils/utils'
 import { executeScripts, parseHTMLAndLoadSources } from '../utils/source'
-import { triggerAppHook } from '../utils/application'
+import { triggerAppHook, isSandboxEnabled } from '../utils/application';
 import { SandBox } from '../sandbox/SandBox'
 import { addStyles } from '../utils/dom'
+import { originalWindow } from '../utils/originalEnv';
 declare const window: any
 
 export async function bootstrapApp(app: Application): Promise<any> {
@@ -17,8 +18,12 @@ export async function bootstrapApp(app: Application): Promise<any> {
     throw error
   }
 
-  app.sandBox = new SandBox(app)
-  app.sandBox.start()
+  // 开始沙箱
+  if (isSandboxEnabled(app)) {
+    app.sandBox = new SandBox(app)
+    app.sandBox.start()
+  }
+  
   app.container.innerHTML = app.pageBody as string
 
   // 执行子应用入口页面的 styles 和 scripts 标签
@@ -52,8 +57,11 @@ export async function bootstrapApp(app: Application): Promise<any> {
       triggerAppHook(app, 'bootstrapped', AppStatus.BOOTSTRAPPED)
       // 子应用首次加载的脚本执行完就不再需要了
       app.scripts!.length = 0
-      // 记录当前的 window 快照，重新挂载子应用时恢复
-      app.sandBox?.recordWindowSnapshot()
+
+      if (isSandboxEnabled(app)) {
+        // 记录当前的 window 快照，重新挂载子应用时恢复
+        app.sandBox?.recordWindowSnapshot()
+      }
     })
     .catch((err) => {
       app.status = AppStatus.BOOTSTRAP_ERROR
@@ -77,7 +85,10 @@ function validateLifeCycleFunc(name: string, fn: any) {
 }
 
 async function getLifeCycleFuncs(app: Application) {
-  const result = app.sandBox?.proxyWindow[`mini-single-spa-${app.name}`]
+  let result = originalWindow.__SINGLE_SPA__
+  if (isSandboxEnabled(app)) {
+    result = app.sandBox?.proxyWindow.__SINGLE_SPA__
+  }
   if (typeof result === 'function')
     return result()
 

@@ -44,7 +44,12 @@ export interface Application {
   /**
    * app 是否是第一次加载
    */
-  isFirstLoaded?: boolean
+  isFirstLoaded?: boolean,
+  /**
+   * enabled: 是否开启 js 作用域隔离、元素隔离、默认开启
+   * css: 是否开启样式隔离，默认关闭
+   */
+  sandboxConfig: { enabled: boolean, css: boolean },
   /**
    * loadApp 必须返回一个 Promise, resolve 之后得到一个对象
    * bootstrap: (props: AnyObject) => Promise<any>

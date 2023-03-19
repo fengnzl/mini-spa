@@ -24,7 +24,7 @@ export async function unmount(options) {
 }
 
 if (window.__IS_SINGLE_SPA__) {
-  window['mini-single-spa-react'] = {
+  window.__SINGLE_SPA__ = {
     bootstrap,
     mount,
     unmount
