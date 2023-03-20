@@ -5,6 +5,7 @@ import { triggerAppHook, isSandboxEnabled } from '../utils/application';
 import { addStyles } from '../utils/dom';
 export function mountApp(app: Application): Promise<any> {
   triggerAppHook(app, 'beforeMount', AppStatus.BEFORE_MOUNT)
+  app.container.setAttribute('single-spa-name', app.name)
 
   if (!app.isFirstLoaded) {
     if (isSandboxEnabled(app)) {

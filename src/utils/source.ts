@@ -1,5 +1,7 @@
 import type { Application, Source } from '../types'
 import { createElement, removeNode } from './dom'
+import { addCSSScope } from './addCSSSCope';
+import { originalWindow, originalAppendChild } from './originalEnv';
 
 const urlReg = /^https?:\/\//
 function isValidURL(url: any) {
@@ -57,22 +59,15 @@ async function loadSourceText(url: string) {
 
 export const globalLoadedURLs: string[] = []
 
-function extractScriptsAndStyles(
-  node: Element,
-  app: Application
-): { scripts: Source[]; styles: Source[] } {
-  if (!app.appLoadedURLs) app.appLoadedURLs = []
-
+function extractScriptsAndStyles(node: Element, app: Application) {
   if (!node.children.length) return { scripts: [], styles: [] }
 
-  const styles: Source[] = []
-  const scripts: Source[] = []
+  let styles: Source[] = []
+  let scripts: Source[] = []
   for (const child of Array.from(node.children)) {
-    // 是否是全局资源
     const isGlobal = Boolean(child.getAttribute('global'))
-
     const tagName = child.tagName
-    // 如果是 style 样式类型
+
     if (tagName === 'STYLE') {
       removeNode(child)
       styles.push({
@@ -82,41 +77,53 @@ function extractScriptsAndStyles(
     } else if (tagName === 'SCRIPT') {
       removeNode(child)
       const src = child.getAttribute('src') || ''
-      if (app.appLoadedURLs.includes(src) || globalLoadedURLs.includes(src))
+      if (app.appLoadedURLs?.includes(src) || globalLoadedURLs.includes(src)) {
         continue
+      }
 
       const config: Source = {
         isGlobal,
+        type: child.getAttribute('type'),
         value: child.textContent || '',
-        type: child.getAttribute('type') || '',
       }
+
       if (src) {
         config.url = src
-        if (isGlobal) globalLoadedURLs.push(src)
-        else app.appLoadedURLs.push(src)
+        if (isGlobal) {
+          globalLoadedURLs.push(src)
+        } else {
+          app.appLoadedURLs!.push(src)
+        }
       }
+
       scripts.push(config)
     } else if (tagName === 'LINK') {
       removeNode(child)
       const href = child.getAttribute('href') || ''
-      if (app.appLoadedURLs.includes(href) || globalLoadedURLs.includes(href))
+      if (app.appLoadedURLs!.includes(href) || globalLoadedURLs.includes(href)) {
         continue
+      }
 
       if (child.getAttribute('rel') === 'stylesheet' && href) {
         styles.push({
-          isGlobal,
           url: href,
+          isGlobal,
           value: '',
         })
-        if (isGlobal) globalLoadedURLs.push(href)
-        else app.appLoadedURLs.push(href)
+
+        if (isGlobal) {
+          globalLoadedURLs.push(href)
+        } else {
+          app.appLoadedURLs!.push(href)
+        }
       }
     } else {
       const result = extractScriptsAndStyles(child, app)
-      scripts.push(...result.scripts)
-      styles.push(...result.styles)
+      scripts = scripts.concat(result.scripts)
+      styles = styles.concat(result.styles)
     }
   }
+
   return { scripts, styles }
 }
 
@@ -126,7 +133,6 @@ function loadScripts(scripts: Source[]) {
   return scripts
     .map((item) => {
       const type = item.type || 'text/javascript'
-
       if (item.isGlobal) {
         const script = createElement('script', {
           type,
@@ -136,7 +142,7 @@ function loadScripts(scripts: Source[]) {
         if (item.url) script.setAttribute('src', item.url)
         else script.textContent = item.value
 
-        head.appendChild(script)
+        originalAppendChild.call(head, script)
         // eslint-disable-next-line array-callback-return
         return
       }
@@ -151,15 +157,21 @@ export function executeScripts(scripts: string[], app: Application) {
   // eslint-disable-next-line no-useless-catch
   try {
     scripts.forEach((code) => {
-      const wrapCode = `
-        (function (proxyWindow) {
-          with(proxyWindow) {
-            (function (window){${code}\n}).call(proxyWindow, proxyWindow)
-          }
-        })(this)
-      `
-      // eslint-disable-next-line no-new-func
-      new Function(wrapCode).call(app.sandBox?.proxyWindow)
+      if (app.sandboxConfig?.enabled) {
+        // ts 使用 with 会报错，所以需要这样包一下
+        // 将子应用的 js 代码全局 window 环境指向代理环境 proxyWindow
+        const warpCode = `
+          ;(function(proxyWindow){
+            with (proxyWindow) {
+              (function(window){${code}\n}).call(proxyWindow, proxyWindow)
+            }
+          })(this);
+        `
+
+        new Function(warpCode).call(app.sandBox!.proxyWindow)
+      } else {
+        new Function('window', code).call(originalWindow, originalWindow)
+      }
     })
   } catch (e) {
     throw e
@@ -178,14 +190,14 @@ function loadStyles(styles: Source[]) {
             rel: 'stylesheet',
             href: item.url,
           })
-          head.appendChild(link)
+          originalAppendChild.call(head, link)
         } else {
           const style = createElement('style', {
             global: item.isGlobal,
             type: 'text/css',
             textContent: item.value,
           })
-          head.appendChild(style)
+          originalAppendChild.call(head, style)
         }
       }
 
@@ -201,7 +213,10 @@ export async function fetchScriptAndExecute(url: string, app: Application) {
   executeScripts([content], app)
 }
 
-export async function fetchStyleAndReplaceStyleContent(style: Node, url: string) {
+export async function fetchStyleAndReplaceStyleContent(style: HTMLStyleElement, url: string, app: Application) {
   const content = await loadSourceText(url)
   style.textContent = content
+  if (app.sandboxConfig.css) {
+    addCSSScope(style, app)
+  }
 }

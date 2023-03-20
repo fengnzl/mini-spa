@@ -361,7 +361,10 @@ export class SandBox {
    * 代理 window 对象
    */
   createProxyWindow(appName: string) {
-    const descriptorMap = new Map<string| symbol, 'target' | 'originalWindow'>()
+    const descriptorMap = new Map<
+      string | symbol,
+      'target' | 'originalWindow'
+    >()
     return new Proxy(this.microAppWindow, {
       get(target, key) {
         // 如果是代理对象的属性

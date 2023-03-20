@@ -17,8 +17,8 @@ export const originalCreateElement = Document.prototype.createElement
 export const originalQuerySelector = Document.prototype.querySelector
 export const originalQuerySelectorAll = Document.prototype.querySelectorAll
 export const originalGetElementById = Document.prototype.getElementById
-export const originalGetElementsByClassName
-  = Document.prototype.getElementsByClassName
-export const originalGetElementsByTagName
-  = Document.prototype.getElementsByTagName
+export const originalGetElementsByClassName =
+  Document.prototype.getElementsByClassName
+export const originalGetElementsByTagName =
+  Document.prototype.getElementsByTagName
 export const originalGetElementsByName = Document.prototype.getElementsByName

@@ -15,7 +15,9 @@ const RouteExample = () => {
   return (
     <Router basename={window.__IS_SINGLE_SPA__ ? '/react' : '/'}>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/">
+          <span className='home'>Home</span>
+        </Link>
         <Divider type="vertical" />
         <Link to="/about">About</Link>
       </nav>

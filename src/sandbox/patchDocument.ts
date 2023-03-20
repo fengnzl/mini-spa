@@ -1,5 +1,11 @@
-import { getApp, setCurrentAppName, getCurrentAppName, getCurrentApp } from '../utils/application';
-import { isUniqueElement } from '../utils/dom';
+import {
+  getApp,
+  setCurrentAppName,
+  getCurrentAppName,
+  getCurrentApp,
+} from '../utils/application'
+import { isUniqueElement } from '../utils/dom'
+import { addCSSScope } from '../utils/addCSSSCope'
 import {
   originalAppendChild,
   originalInsertBefore,
@@ -31,6 +37,16 @@ export function patchDocument() {
     newNode: T,
     referenceNode: Node | null
   ): any {
+    // vue3 根结点 补丁
+    const appName = getCurrentAppName()
+    if (
+      this.parentElement?.getAttribute('id') ===
+        'subapp-viewport' &&
+      appName &&
+      !this.getAttribute('single-spa-name')
+    ) {
+      this.setAttribute('single-spa-name', appName)
+    }
     return pathAddChild(this, newNode, referenceNode, 'insert')
   }
 
@@ -44,7 +60,6 @@ export function patchDocument() {
     return element
   }
 
-  // 将所有查询 dom 的范围限制在子应用挂载的 dom 容器上
   // 将所有查询 dom 的范围限制在子应用挂载的 dom 容器上
   Document.prototype.querySelector = function querySelector(
     this: Document,
@@ -153,6 +168,14 @@ function pathAddChild(
   referenceNode: Node | null,
   type: 'append' | 'insert'
 ) {
+  // 如果是 fragment 类型
+  if (child.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+    const appName = (parent as any).getAttribute('single-spa-name')
+    if (appName) {
+      setSingleSpaName(child, appName)
+    }
+    return addChild(parent, child, referenceNode, type)
+  }
   const tagName = child.tagName
   if (!tags.includes(tagName))
     return addChild(parent, child, referenceNode, type)
@@ -161,7 +184,13 @@ function pathAddChild(
   const app = getApp(appName)
   if (!appName || !app) return addChild(parent, child, referenceNode, type)
   // 所有 STYLE 都放到 head 下
-  if (tagName === 'STYLE') return addChild(parent, child, referenceNode, type)
+  if (tagName === 'STYLE') {
+    if (app.sandboxConfig.css) {
+      addCSSScope(child, app)
+    }
+
+    return addChild(parent, child, referenceNode, type)
+  }
 
   if (tagName === 'SCRIPT') {
     const src = child.src
@@ -199,7 +228,7 @@ function pathAddChild(
     const style = document.createElement('style')
     style.setAttribute('type', 'text/css')
 
-    fetchStyleAndReplaceStyleContent(style, href)
+    fetchStyleAndReplaceStyleContent(style, href, app)
     return addChild(head, style, referenceNode, type)
   }
 
@@ -214,4 +243,13 @@ function addChild(
 ) {
   if (type === 'append') return originalAppendChild.call(parent, child)
   return originalInsertBefore.call(parent, child, referenceNode)
+}
+
+function setSingleSpaName(child: Element, appName: string) {
+  Array.from(child.children).forEach((node) => {
+    node.setAttribute('single-spa-name', appName)
+    if (node.children) {
+      setSingleSpaName(node, appName)
+    }
+  })
 }
