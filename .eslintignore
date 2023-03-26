@@ -1,2 +1,5 @@
 playground/**
 rollup.config.js
+eslintFormatter.cjs
+report.json
+.github

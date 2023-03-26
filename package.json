@@ -42,6 +42,7 @@
     "dev": "pnpm run playground:install && pnpm run playground:dev",
     "serve": "pnpm run playground:install && pnpm build && pnpm run playground:dev",
     "lint": "eslint .",
+    "lint:formatter": "eslint --format ./eslintFormatter.cjs . -o report.json",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish",
     "start": "tsx src/index.ts",
@@ -51,7 +52,7 @@
     "playground:dev": "nx run-many --target=dev"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.35.3",
+    "@antfu/eslint-config": "^0.37.0",
     "@antfu/ni": "^0.20.0",
     "@antfu/utils": "^0.7.2",
     "@rollup/plugin-typescript": "^11.0.0",

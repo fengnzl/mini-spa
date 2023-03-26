@@ -1,0 +1,1117 @@
+[
+  {
+    "path": "/src/application/registerApplication.ts",
+    "errorInfo": [
+      {
+        "message": "Trailing spaces not allowed.",
+        "start": 19,
+        "end": 19,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 23,
+        "end": 24,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/index.ts",
+    "errorInfo": [
+      {
+        "message": "'a' is assigned a value but never used.",
+        "start": 6,
+        "end": 6,
+        "type": "error"
+      },
+      {
+        "message": "'a' is assigned a value but never used. Allowed unused vars must match /^_/u.",
+        "start": 6,
+        "end": 6,
+        "type": "warning"
+      },
+      {
+        "message": "Unexpected console statement.",
+        "start": 7,
+        "end": 7,
+        "type": "warning"
+      }
+    ]
+  },
+  {
+    "path": "/src/lifecycle/bootstrap.ts",
+    "errorInfo": [
+      {
+        "message": "Member 'isSandboxEnabled' of the import declaration should be sorted alphabetically.",
+        "start": 5,
+        "end": 5,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 5,
+        "end": 5,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 8,
+        "end": 8,
+        "type": "error"
+      },
+      {
+        "message": "'window' is defined but never used.",
+        "start": 9,
+        "end": 9,
+        "type": "error"
+      },
+      {
+        "message": "'window' is defined but never used. Allowed unused vars must match /^_/u.",
+        "start": 9,
+        "end": 9,
+        "type": "warning"
+      },
+      {
+        "message": "Trailing spaces not allowed.",
+        "start": 26,
+        "end": 26,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 89,
+        "end": 91,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/lifecycle/mount.ts",
+    "errorInfo": [
+      {
+        "message": "Member 'isSandboxEnabled' of the import declaration should be sorted alphabetically.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 5,
+        "end": 5,
+        "type": "error"
+      },
+      {
+        "message": "Trailing spaces not allowed.",
+        "start": 16,
+        "end": 16,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/lifecycle/unmount.ts",
+    "errorInfo": [
+      {
+        "message": "Member 'isSandboxEnabled' of the import declaration should be sorted alphabetically.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 5,
+        "end": 5,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 15,
+        "end": 17,
+        "type": "error"
+      },
+      {
+        "message": "Trailing spaces not allowed.",
+        "start": 18,
+        "end": 18,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/sandbox/SandBox.ts",
+    "errorInfo": [
+      {
+        "message": "'/Users/fengliu/Desktop/learn/mini-spa/src/utils/originalEnv.ts' imported multiple times.",
+        "start": 9,
+        "end": 9,
+        "type": "warning"
+      },
+      {
+        "message": "Member 'originalDocument' of the import declaration should be sorted alphabetically.",
+        "start": 14,
+        "end": 14,
+        "type": "error"
+      },
+      {
+        "message": "'/Users/fengliu/Desktop/learn/mini-spa/src/utils/originalEnv.ts' imported multiple times.",
+        "start": 15,
+        "end": 15,
+        "type": "warning"
+      },
+      {
+        "message": "`../utils/application` import should occur before import of `./patchDocument`",
+        "start": 17,
+        "end": 17,
+        "type": "error"
+      },
+      {
+        "message": "Expected blank line between class members.",
+        "start": 55,
+        "end": 58,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 71,
+        "end": 71,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 85,
+        "end": 85,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 113,
+        "end": 114,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 119,
+        "end": 120,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 121,
+        "end": 121,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 213,
+        "end": 214,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 231,
+        "end": 232,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 261,
+        "end": 261,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 277,
+        "end": 278,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 279,
+        "end": 279,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 285,
+        "end": 286,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 292,
+        "end": 293,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 294,
+        "end": 294,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 302,
+        "end": 303,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 304,
+        "end": 304,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 311,
+        "end": 312,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 318,
+        "end": 319,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 331,
+        "end": 332,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 353,
+        "end": 354,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 371,
+        "end": 371,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected mix of '&&' and '?:'. Use parentheses to clarify the intended order of operations.",
+        "start": 376,
+        "end": 376,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected mix of '&&' and '?:'. Use parentheses to clarify the intended order of operations.",
+        "start": 377,
+        "end": 377,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 381,
+        "end": 381,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 397,
+        "end": 398,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 422,
+        "end": 422,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 423,
+        "end": 425,
+        "type": "error"
+      },
+      {
+        "message": "'||' should be placed at the beginning of the line.",
+        "start": 439,
+        "end": 439,
+        "type": "error"
+      },
+      {
+        "message": "'||' should be placed at the beginning of the line.",
+        "start": 440,
+        "end": 440,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/sandbox/patchDocument.ts",
+    "errorInfo": [
+      {
+        "message": "Member 'getCurrentAppName' of the import declaration should be sorted alphabetically.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Member 'originalDocument' of the import declaration should be sorted alphabetically.",
+        "start": 12,
+        "end": 12,
+        "type": "error"
+      },
+      {
+        "message": "Member 'executeScripts' of the import declaration should be sorted alphabetically.",
+        "start": 24,
+        "end": 24,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 31,
+        "end": 32,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 38,
+        "end": 39,
+        "type": "error"
+      },
+      {
+        "message": "'===' should be placed at the beginning of the line.",
+        "start": 43,
+        "end": 43,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 44,
+        "end": 44,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 45,
+        "end": 45,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 47,
+        "end": 49,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 55,
+        "end": 56,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 66,
+        "end": 67,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 69,
+        "end": 71,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 78,
+        "end": 79,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 81,
+        "end": 83,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 94,
+        "end": 95,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 99,
+        "end": 100,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 106,
+        "end": 107,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 111,
+        "end": 112,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 118,
+        "end": 119,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 123,
+        "end": 124,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 130,
+        "end": 131,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 140,
+        "end": 141,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 143,
+        "end": 145,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 169,
+        "end": 170,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 174,
+        "end": 176,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 185,
+        "end": 185,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 188,
+        "end": 190,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 198,
+        "end": 198,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 199,
+        "end": 199,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 202,
+        "end": 204,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 204,
+        "end": 204,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'else'.",
+        "start": 204,
+        "end": 206,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 217,
+        "end": 217,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 218,
+        "end": 218,
+        "type": "error"
+      },
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 219,
+        "end": 219,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 223,
+        "end": 225,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 225,
+        "end": 225,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'else'.",
+        "start": 225,
+        "end": 227,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 242,
+        "end": 243,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 244,
+        "end": 244,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 251,
+        "end": 253,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/sandbox/patchDocumentEvents.ts",
+    "errorInfo": [
+      {
+        "message": "'/Users/fengliu/Desktop/learn/mini-spa/src/utils/originalEnv.ts' imported multiple times.",
+        "start": 4,
+        "end": 4,
+        "type": "warning"
+      },
+      {
+        "message": "`../utils/originalEnv` import should occur before import of `./SandBox`",
+        "start": 7,
+        "end": 7,
+        "type": "error"
+      },
+      {
+        "message": "'/Users/fengliu/Desktop/learn/mini-spa/src/utils/originalEnv.ts' imported multiple times.",
+        "start": 7,
+        "end": 7,
+        "type": "warning"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 18,
+        "end": 19,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 30,
+        "end": 32,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 41,
+        "end": 42,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 48,
+        "end": 49,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 66,
+        "end": 67,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 73,
+        "end": 73,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 81,
+        "end": 82,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/types.ts",
+    "errorInfo": [
+      {
+        "message": "'BEFORE_BOOTSTRAP' is defined but never used.",
+        "start": 11,
+        "end": 11,
+        "type": "error"
+      },
+      {
+        "message": "'BOOTSTRAPPED' is defined but never used.",
+        "start": 12,
+        "end": 12,
+        "type": "error"
+      },
+      {
+        "message": "'BEFORE_MOUNT' is defined but never used.",
+        "start": 13,
+        "end": 13,
+        "type": "error"
+      },
+      {
+        "message": "'MOUNTED' is defined but never used.",
+        "start": 14,
+        "end": 14,
+        "type": "error"
+      },
+      {
+        "message": "'BEFORE_UNMOUNT' is defined but never used.",
+        "start": 15,
+        "end": 15,
+        "type": "error"
+      },
+      {
+        "message": "'UNMOUNTED' is defined but never used.",
+        "start": 16,
+        "end": 16,
+        "type": "error"
+      },
+      {
+        "message": "'BOOTSTRAP_ERROR' is defined but never used.",
+        "start": 17,
+        "end": 17,
+        "type": "error"
+      },
+      {
+        "message": "'MOUNT_ERROR' is defined but never used.",
+        "start": 18,
+        "end": 18,
+        "type": "error"
+      },
+      {
+        "message": "'UNMOUNT_ERROR' is defined but never used.",
+        "start": 19,
+        "end": 19,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected separator (,).",
+        "start": 47,
+        "end": 47,
+        "type": "error"
+      },
+      {
+        "message": "Expected a semicolon.",
+        "start": 52,
+        "end": 52,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected separator (,).",
+        "start": 52,
+        "end": 52,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/utils/addCSSSCope.ts",
+    "errorInfo": [
+      {
+        "message": "All imports in the declaration are only used as types. Use `import type`.",
+        "start": 1,
+        "end": 1,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 1,
+        "end": 1,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 2,
+        "end": 2,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 17,
+        "end": 19,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 40,
+        "end": 40,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 47,
+        "end": 47,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 54,
+        "end": 54,
+        "type": "error"
+      },
+      {
+        "message": "Expected parentheses around arrow function argument having a body with curly braces.",
+        "start": 71,
+        "end": 71,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected string concatenation.",
+        "start": 80,
+        "end": 80,
+        "type": "error"
+      },
+      {
+        "message": "Newline required at end of file but not found.",
+        "start": 86,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/utils/application.ts",
+    "errorInfo": [
+      {
+        "message": "Missing trailing comma.",
+        "start": 34,
+        "end": 35,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 37,
+        "end": 37,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/utils/dom.ts",
+    "errorInfo": [
+      {
+        "message": "'&&' should be placed at the beginning of the line.",
+        "start": 9,
+        "end": 9,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 25,
+        "end": 25,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 33,
+        "end": 33,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/utils/originalEnv.ts",
+    "errorInfo": [
+      {
+        "message": "'=' should be placed at the beginning of the line.",
+        "start": 20,
+        "end": 20,
+        "type": "error"
+      },
+      {
+        "message": "'=' should be placed at the beginning of the line.",
+        "start": 22,
+        "end": 22,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/src/utils/source.ts",
+    "errorInfo": [
+      {
+        "message": "Extra semicolon.",
+        "start": 3,
+        "end": 3,
+        "type": "error"
+      },
+      {
+        "message": "Member 'originalAppendChild' of the import declaration should be sorted alphabetically.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Extra semicolon.",
+        "start": 4,
+        "end": 4,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 20,
+        "end": 20,
+        "type": "error"
+      },
+      {
+        "message": "Missing trailing comma.",
+        "start": 27,
+        "end": 28,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 41,
+        "end": 41,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 50,
+        "end": 50,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 63,
+        "end": 63,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 77,
+        "end": 77,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 80,
+        "end": 82,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 92,
+        "end": 94,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 94,
+        "end": 94,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'else'.",
+        "start": 94,
+        "end": 96,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 100,
+        "end": 100,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 103,
+        "end": 105,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 114,
+        "end": 116,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 116,
+        "end": 116,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'else'.",
+        "start": 116,
+        "end": 118,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 120,
+        "end": 120,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 132,
+        "end": 132,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 142,
+        "end": 142,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 150,
+        "end": 150,
+        "type": "error"
+      },
+      {
+        "message": "The Function constructor is eval.",
+        "start": 171,
+        "end": 171,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 172,
+        "end": 172,
+        "type": "error"
+      },
+      {
+        "message": "The Function constructor is eval.",
+        "start": 173,
+        "end": 173,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 176,
+        "end": 176,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 182,
+        "end": 182,
+        "type": "error"
+      },
+      {
+        "message": "Closing curly brace appears on the same line as the subsequent block.",
+        "start": 194,
+        "end": 194,
+        "type": "error"
+      },
+      {
+        "message": "Expect newline after if",
+        "start": 204,
+        "end": 204,
+        "type": "error"
+      },
+      {
+        "message": "More than 1 blank line not allowed.",
+        "start": 210,
+        "end": 211,
+        "type": "error"
+      },
+      {
+        "message": "Unnecessary { after 'if' condition.",
+        "start": 219,
+        "end": 221,
+        "type": "error"
+      },
+      {
+        "message": "Newline required at end of file but not found.",
+        "start": 222,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/test.js",
+    "errorInfo": [
+      {
+        "message": "Unexpected console statement.",
+        "start": 3,
+        "end": 3,
+        "type": "warning"
+      },
+      {
+        "message": "Unexpected console statement.",
+        "start": 6,
+        "end": 6,
+        "type": "warning"
+      },
+      {
+        "message": "Unexpected console statement.",
+        "start": 10,
+        "end": 10,
+        "type": "warning"
+      },
+      {
+        "message": "Unexpected console statement.",
+        "start": 14,
+        "end": 14,
+        "type": "warning"
+      },
+      {
+        "message": "Newline required at end of file but not found.",
+        "start": 21,
+        "type": "error"
+      }
+    ]
+  },
+  {
+    "path": "/tsconfig.json",
+    "errorInfo": [
+      {
+        "message": "Unexpected trailing comma.",
+        "start": 12,
+        "end": 12,
+        "type": "error"
+      },
+      {
+        "message": "Unexpected trailing comma.",
+        "start": 14,
+        "end": 14,
+        "type": "error"
+      }
+    ]
+  }
+]
